@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<{$xoops_langcode}>" lang="<{$xoops_langcode}>">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=<{$xoops_charset}>">
+<meta http-equiv="content-language" content="<{$xoops_langcode}>">
+<meta http-equiv="content-script-type" content="text/javascript">
+<meta http-equiv="content-style-type" content="text/css">
+<title><{$legacy_sitename|xoops_escape}> : <{$smarty.const._CPHOME}> : <{$legacy_pagetitle|xoops_escape}></title>
+<script type="text/javascript" src="<{$xoops_url}>/include/xoops.js"></script>
+<script type="text/javascript" src="<{"jquery/jquery.js"|theme}>"></script>
+<script type="text/javascript" src="<{"jquery/thickbox.js"|theme}>"></script>
+<link href="stylesheets/style.css" rel="stylesheet" type="text/css">
+<{stylesheet file=style.css}>
+<{stylesheet file=module.css}>
+
+<script type="text/javascript">
+<!-- <![CDATA[
+
+var tb_pathToImage = '<{"jquery/loadingAnimation.gif"|theme}>';
+   
+var cid = <{if $smarty.get.fct == "preferences" && $smarty.get.mod > 0}><{$smarty.get.mod}><{else}><{$currentModule->mXoopsModule->get('mid')}><{/if}>;
+function ccToggle(id)
+{
+	el = xoopsGetElementById('c'+id).style;
+	if (el.display == 'block') {
+		el.display = 'none';
+		xoopsGetElementById('t'+id).className = 'head';
+		xoopsGetElementById('i'+id).src = '<{"design/max.gif"|theme}>';
+	} else {
+		el.display = 'block';
+		xoopsGetElementById('t'+id).className = 'head2';
+		xoopsGetElementById('i'+id).src = '<{"design/min.gif"|theme}>';
+	}
+}
+// ]]> -->
+</script>
+
+<script type="text/javascript">
+
+	/* containerh3*/
+	
+	$(document).ready(function() {
+  $('div.containerInfo > div').hide();
+  $('div.containerInfo > h5').click(function() {
+    var $nextDiv = $(this).next();
+    var $visibleSiblings = $nextDiv.siblings('div:visible');
+    if ($visibleSiblings.length ) {
+      $visibleSiblings.slideUp('fast', function() {
+        $nextDiv.slideToggle('fast');
+      });
+    } else {
+      $nextDiv.slideToggle('fast');
+    }
+  });
+});
+
+	</script>
+</head>
+<body onload="ccToggle(cid);">
+
+<div id="container">
+
+<div id="header">
+
+<div class="logo"><a href="<{$xoops_url}>/admin.php">XOOPS Cube Administration</a></div>
+
+<div class="searchbar">
+  <{*  <{$xoops_lblocks.action_search.content}> *}>
+  <form action="<{$xoops_url}>/modules/legacy/admin/index.php?action=actSearch" method="post" class="searchBox">
+  <input type="text" size="40" name="keywords">
+  <input type="submit" value="Search">
+  </form>
+</div>
+
+<div class="topnav">
+<span class="linkdev">
+<img src="<{"icons/tool.gif"|theme}>" alt=""> <a href="http://sourceforge.net/projects/xoopscube/?KeepThis=true&TB_iframe=true&height=500&amp;width=1000" class="thickbox" title="XOOPS Cube Development">Development</a> 
+<img src="<{"icons/bug.gif"|theme}>" alt=""> <a href="http://sourceforge.net/tracker/?group_id=159211?KeepThis=true&TB_iframe=true&height=500&amp;width=1000" class="thickbox" title="Sourceforge.net :: XOOPSCube Bug Tracker">Bug Tracker</a> 
+<img src="<{"icons/preview.gif"|theme}>" alt=""> <a class="thickbox" href="<{$xoops_url}>/?KeepThis=true&TB_iframe=true&height=500&width=1000"><{$smarty.const._PREVIEW}></a>   
+</span> 
+<span class="linksite"><img src="<{"icons/home.gif"|theme}>" alt=""> <a href="<{$xoops_url}>/">SITE</a>  
+<img src="<{"icons/logout.gif"|theme}>" alt=""> <a href="<{$xoops_url}>/user.php?op=logout"><{$smarty.const._LOGOUT}></a></span> 
+</div>
+
+</div>
+
+<div id="admincontent">
+<table cellspacing="0">
+<tr>
+<td id="leftcolumn">
+  <{$xoops_lblocks.sidemenu.content}>
+
+  <{foreach name=lblock item=block from=$xoops_lblocks}>
+  <{if $block.name != 'action_search' && $block.name != 'sidemenu'}>
+  <{$block.content}>
+  <{/if}>
+  <{/foreach}>
+</td>
+<td id="centercolumn">
+
+<noscript>
+  <div id="menunavi">
+  <h2><{$currentModule->mXoopsModule->getShow('name')}></h2>
+  <{if $currentModule->getAdminMenu()}>
+    <ul class="submenunavi">
+      <{foreach item=menu from=$currentModule->getAdminMenu()}>
+        <{if $menu.escaped === false}>
+          <li><a href="<{$menu.link|xoops_escape:link}>"><{$menu.title|xoops_escape}></a></li>
+        <{else}>
+          <li><a href="<{$menu.link}>"><{$menu.title|xoops_escape}></a></li>
+        <{/if}>
+      <{/foreach}>
+	  
+	  <!-- Start Usability improvements by Wanikoo -->
+	  
+	  <{if $currentModule->mXoopsModule->getInfo('templates')}>
+      <li><a href="<{$xoops_url}>/modules/legacyRender/admin/index.php?action=TplfileList&amp;tpl_module=<{$currentModule->mXoopsModule->getShow('dirname')}>&amp;sort=-9"><{$smarty.const._AD_LEGACY_LANG_TEMPLATE_INFO}></a></li>
+      <{/if}>
+	  
+	  <{if $currentModule->mXoopsModule->getInfo('blocks')}>
+      <li><a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockList&amp;dirname=<{$currentModule->mXoopsModule->getShow('dirname')}>"><{$smarty.const._MI_LEGACY_MENU_BLOCKLIST}></a></li>
+      <li><a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockInstallList&amp;dirname=<{$currentModule->mXoopsModule->getShow('dirname')}>"><{$smarty.const._MI_LEGACY_MENU_BLOCKINSTALL}></a></li>
+      <{/if}>
+          
+	  <{if $currentModule->mXoopsModule->getInfo('hasComments')}>
+      <li><a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=CommentList&amp;com_modid=<{$currentModule->mXoopsModule->getShow('mid')}>&amp;sort=-8"><{$smarty.const._MI_LEGACY_MENU_COMMENT_MANAGE}></a></li>
+      <{/if}>
+	  
+	  <{if $currentModule->mXoopsModule->hasNeedUpdate()}>
+      <li><a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=ModuleUpdate&amp;dirname=<{$currentModule->mXoopsModule->getShow('dirname')}>"><{$smarty.const._AD_LEGACY_LANG_UPGRADE}>&nbsp;<img src="<{"icons/upgrade.gif"|theme}>" alt="<{$smarty.const._AD_LEGACY_LANG_UPGRADE}>" title="<{$smarty.const._AD_LEGACY_LANG_UPGRADE}>"></a></li>
+	  <{/if}>
+   
+	  <!-- End Usability improvements by Wanikoo -->
+
+	</ul>
+  <{/if}>
+  </div>
+</noscript>
+
+  <div id="contentBody"><{$xoops_contents}></div>
+  <div class="return_top"><a href="#container"><{$smarty.const._RETURN_TOP}> <img src="<{"icons/page_up.gif"|theme}>" alt="<{$smarty.const._RETURN_TOP}>" title="<{$smarty.const._RETURN_TOP}>"></a></div>
+  
+</td>
+</tr>
+</table>
+</div>
+
+<div id="footer">Powered by&nbsp;<{$smarty.const.XOOPS_VERSION}>&copy; 2001-2007 <a href="http://xoopscube.org/" target="_blank">The XOOPS Cube Project<br>
+</a>Usability improvements by <a href="http://xoopscube.org/userinfo.php?uid=145">Wanikoo</a>. Icons by <a href="http://www.famfamfam.com/">FamFamFam</a>. Theme by <a href="http://xoopserver.com">Gigamaster</a>. </div>
+
+</div>
+</body>
+</html>
+<{$stdout_buffer}>

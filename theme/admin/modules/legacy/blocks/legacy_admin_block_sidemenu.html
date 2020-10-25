@@ -1,0 +1,50 @@
+<{foreach item=module from=$modules}>
+
+  <{if $module->hasAdminIndex()}>
+    <div id="t<{$module->mXoopsModule->getShow('mid')}>" class="head">
+      <a href="javascript:void(0)" onclick="ccToggle(<{$module->mXoopsModule->getShow('mid')}>)"><img src="<{"design/max.gif"|theme}>" alt="" id="i<{$module->mXoopsModule->getShow('mid')}>"></a>
+      <a href="<{$module->getAdminIndex()|xoops_escape:link}>"><{$module->mXoopsModule->getShow('name')}></a>
+    </div>
+
+    <div id="c<{$module->mXoopsModule->getShow('mid')}>" class="submenu">
+      <ul>
+      <{if $module->getAdminMenu()}>
+        <{foreach item=menu from=$module->getAdminMenu()}>
+          <{if $menu.show !== false}>
+            <{if $menu.escaped === false}>
+              <li><a href="<{$menu.link|xoops_escape:link}>"><{$menu.title|xoops_escape}></a></li>
+            <{else}>
+              <li><a href="<{$menu.link}>"><{$menu.title|xoops_escape}></a></li>
+            <{/if}>
+          <{/if}>
+        <{/foreach}>
+		  <!-- Start Usability improvements by Wanikoo -->
+
+		  <{if $module->mXoopsModule->getInfo('templates')}>
+          <li><img src="<{"icons/templates.gif"|theme}>" alt="<{$smarty.const._AD_LEGACY_LANG_TEMPLATE}>" title="<{$smarty.const._AD_LEGACY_LANG_TEMPLATE}>"> <a href="<{$xoops_url}>/modules/legacyRender/admin/index.php?action=TplfileList&amp;tpl_module=<{$module->mXoopsModule->getShow('dirname')}>&amp;sort=-9"><{$smarty.const._AD_LEGACY_LANG_TEMPLATE}></a></li>
+          <{/if}>
+		  
+		  <{if $module->mXoopsModule->getInfo('blocks')}>
+          <li><img src="<{"icons/blocks.gif"|theme}>" alt="<{$smarty.const._MI_LEGACY_MENU_BLOCKLIST}>" title="<{$smarty.const._MI_LEGACY_MENU_BLOCKLIST}>"> <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockList&amp;dirname=<{$module->mXoopsModule->getShow('dirname')}>"><{$smarty.const._MI_LEGACY_MENU_BLOCKLIST}></a></li>
+          <li><img src="<{"icons/block_add.gif"|theme}>" alt="<{$smarty.const._MI_LEGACY_MENU_BLOCKINSTALL}>" title="<{$smarty.const._MI_LEGACY_MENU_BLOCKINSTALL}>"> <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=BlockInstallList&amp;dirname=<{$module->mXoopsModule->getShow('dirname')}>"><{$smarty.const._MI_LEGACY_MENU_BLOCKINSTALL}></a></li>
+          <{/if}>
+		  
+          <{if $module->mXoopsModule->getInfo('hasComments')}>
+          <li><img src="<{"icons/comments.gif"|theme}>" alt="<{$smarty.const._MI_LEGACY_MENU_COMMENT_MANAGE}>" title="<{$smarty.const._MI_LEGACY_MENU_COMMENT_MANAGE}>"> <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=CommentList&amp;com_modid=<{$module->mXoopsModule->getShow('mid')}>&amp;sort=-8"><{$smarty.const._MI_LEGACY_MENU_COMMENT_MANAGE}></a></li>
+          <{/if}>
+		  
+		  <{if $module->mXoopsModule->hasNeedUpdate()}>
+          <li><img src="<{"icons/upgrade.gif"|theme}>" alt="<{$smarty.const._AD_LEGACY_LANG_UPGRADE}>" title="<{$smarty.const._AD_LEGACY_LANG_UPGRADE}>"> <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=ModuleUpdate&amp;dirname=<{$module->mXoopsModule->getShow('dirname')}>"><{$smarty.const._AD_LEGACY_LANG_UPGRADE}>&nbsp;<img src="<{"icons/upgrade.gif"|theme}>" alt="<{$smarty.const._AD_LEGACY_LANG_UPGRADE}>" title="<{$smarty.const._AD_LEGACY_LANG_UPGRADE}>"></a></li>
+         <{else}>
+          <li><img src="<{"icons/info.gif"|theme}>" alt="<{$smarty.const._AD_LEGACY_LANG_INFORMATION}>" title="<{$smarty.const._AD_LEGACY_LANG_INFORMATION}>"> <a href="<{$xoops_url}>/modules/legacy/admin/index.php?action=ModuleInfo&amp;dirname=<{$module->mXoopsModule->getShow('dirname')}>"><{$smarty.const._AD_LEGACY_LANG_INFORMATION}></a></li>
+		  <{/if}>
+		  
+	  	  <!-- Start Usability improvements by Wanikoo -->
+      <{else}>
+        <li><{$smarty.const._AD_LEGACY_LANG_NO_SETTING}></li>
+      <{/if}>
+      </ul>
+    </div>
+  <{/if}>
+
+<{/foreach}>

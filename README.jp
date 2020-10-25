@@ -1,0 +1,16 @@
+管理画面のテーマを手軽に切り替えることが出来ます。
+
+管理画面用のテーマを/themes/ディレクトリにアップロードするか、/modules/admintheme/theme/にアップロードしてください。
+
+http://xoopscube.org/modules/xhnewbb/viewtopic.php?topic_id=490&post_id=2985#forumpost2985
+http://xoopscube.org/modules/xhnewbb/viewtopic.php?topic_id=491&post_id=2986#forumpost2986
+http://xoopscube.org/modules/xhnewbb/viewtopic.php?topic_id=492&post_id=2987#forumpost2987
+gigamaster氏の作成した管理画面テーマをダウンロードし解凍します。
+デフォルトでadminディレクトリになるので、それぞれblue,red,orangeにディレクトリ名を変更します。
+それぞれを/themes/か/modules/admintheme/theme/にアップロードします。（後者をお勧めします。）
+モジュール一般設定のテーマディレクトリの場所をアップロードした場所に合わせます。
+
+
+modules/admintheme/admin/index.phpにアクセスすることでデフォルトに戻すことが出来ます。
+
+あとは触って理解してください。

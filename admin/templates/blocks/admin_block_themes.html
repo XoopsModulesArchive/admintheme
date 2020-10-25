@@ -1,0 +1,14 @@
+<div class="tips"><{$smarty.const._AD_ADMINTHEME_NAME}></div>
+<div style="text-align: center;">
+  <form action="<{$xoops_url}>/modules/admintheme/admin/index.php" method="post">
+  <input type="hidden" name="url" value="<{$xoops_requesturi}>">
+  <select id="admin_theme_select" name="theme" onchange="submit();" size="3">
+  <{foreach item=admintheme_option from=$admintheme_options}>
+  <option value="<{$admintheme_option.name}>" <{$admintheme_option.selected}> ><{$admintheme_option.name}></option>
+  <{/foreach}>
+  </select>
+  <br>
+  <input type="submit" class="formButton" value="<{$smarty.const._GO}>"><br>
+  <p>(<{"<strong>"|cat:$admintheme_count|cat:"</strong>"|string_format:$smarty.const._MB_LEGACY_LANG_NUMTHEME}>)</p>
+  </form>
+</div>
